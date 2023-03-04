@@ -1,3 +1,6 @@
+// fake data to experiment with
+
+
 export const fake = [
     {name:"jack",
      Id: 1,
@@ -35,3 +38,26 @@ export const fake = [
         chat:[]
     }
 ];
+
+export const people = [
+    {
+        name:"raj",
+        Id: 3,
+        chat:[]
+    },
+    {
+        name:"sam",
+        Id: 3,
+        chat:[]
+    },
+    {
+        name:"jake",
+        Id: 3,
+        chat:[]
+    },
+    {
+        name:"steve",
+        Id: 3,
+        chat:[]
+    }
+]

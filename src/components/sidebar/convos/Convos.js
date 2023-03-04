@@ -7,7 +7,7 @@ import { addingUser } from "../../../store/userchatreducer";
 function Convos(props){
     const backcolor = useSelector((state)=>state.userchat);
     const dispatch = useDispatch();
-    // console.log(props);
+    
     return(
         <People style={{
             backgroundColor: backcolor.user === props.data.name ? backcolor.back : "",

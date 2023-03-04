@@ -1,22 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { doc, updateDoc, arrayUnion, arrayRemove,onSnapshot , getDoc} from "firebase/firestore";
+import { db } from "../firebasestore";
 
-// {localStorage.key === "status" ? console.log("yes"):console.log("No")}; 
-// console.log(JSON.parse(localStorage.getItem("status")))
 
 
+// slice for the user
 const userchatslice = createSlice({
     name:"userchat",
     initialState:localStorage.getItem("status") === null ? {
-        // friends:[],
         user:"",
         chat:[],
         back:""
     }: JSON.parse(localStorage.getItem("status")),
-    // initialState:{
-    //     user:"",
-    //     chat:[],
-    //     back:""
-    // },
     reducers:{
 
         addingUser: (state, payload) =>{
@@ -32,7 +27,6 @@ const userchatslice = createSlice({
 
             localStorage.setItem("status",ans);
             return {
-                // ...state,
                 user: payload.payload.name,
                 chat:payload.payload.chat,
                 back:"#8afa6b"
@@ -41,23 +35,41 @@ const userchatslice = createSlice({
 
         addingChat: (state, payload)=>{
             console.log(payload.payload);
-            // console.log(state);
-            let adchat =JSON.parse(localStorage.getItem("status"));
-            adchat.chat.push({from:"me",message:payload.payload})
-            console.log(adchat);
-            localStorage.setItem("status", JSON.stringify(adchat));
+
+            let arr = [];
+            let foundele; 
+            let game ;
+            let temp;
+
+            async function a(){
+                const docRef = doc(db, "chat", "friends");
+                const docSnap = await getDoc(docRef);
+                console.log(docSnap.data());
+
+                foundele = docSnap.data().friends.find(item=> item.name == payload.payload.user)
+                console.log(foundele);
+
+                temp = JSON.parse(JSON.stringify(foundele));
+
+                foundele.chat.push({from:"me", message:payload.payload.mess})
+
+        
+                await updateDoc(docRef, {
+                    friends: arrayRemove(temp)
+                });
+                await updateDoc(docRef, {
+                    friends: arrayUnion(foundele)
+                })
+        };
+
+            a();
+
             return {...state,
-                chat: [...state.chat ,{from:"me",message:payload.payload}],
+                chat: [...state.chat ,{from:"me",message:payload.payload.mess}],
             };
         },
 
-        // addingFriend:(state, payload)=>{
-        //     console.log(payload.payload)
-        //     return {
-        //         ...state,
-        //         friends:[...state.friends, payload.payload]
-        //     }
-        // }
+        
     }
 });
 

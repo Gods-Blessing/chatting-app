@@ -20,12 +20,12 @@ export const Linkss = styled.div`
 `; 
 
 export const Search = styled.input`
-    width: 50%;
+    width: 100%;
     background-color: rgba(22,22,22,0.2);
     padding: 8px;
     border-radius: 20px;
     border: none;
-    margin-right: 20px;
+    margin-right: 0px;
     color: white;
     font-weight: 600;
 
@@ -38,4 +38,11 @@ export const Img = styled.img`
     height: 40px;
     width: 40px;
     border-radius: 50%;
+`;
+
+
+export const Addingtolistbtn = styled.button`
+    background-color: #32a852;
+    padding: 5px;
+    font-weight: 700;
 `

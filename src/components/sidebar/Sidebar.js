@@ -3,21 +3,26 @@ import Convos from "./convos/Convos";
 import { Maincontainer } from "./sidebarStyle";
 import { fake } from "../../fake";
 import { useSelector, useDispatch } from "react-redux";
+import { doc, updateDoc, arrayUnion, arrayRemove, collection, onSnapshot } from "firebase/firestore";
+import { db } from "../../firebasestore";
 
 function Sidebar(){
+    // managing the list of friends
     const [list, setList] = useState([]);
     const user = useSelector((state)=>state.userchat);
-    // console.log(user);
-    console.log(list);
-
+    
     useEffect(()=>{
-        let arr = fake.map((data)=> data)
-        // console.log(arr);
-        setList(arr);
+        let arr = [];
+        const unsub = onSnapshot(doc(db, "chat", "friends"), (doc) => {
+            console.log("Current data: ", doc.data());
+            arr = doc.data().friends;
+            setList(arr);
+        });
+
+        return ()=>unsub();
+
     }, []);
-// console.log(fake);
-// const chat = fake[fake.length - 1];
-// console.log(chat)
+
 
     return(
         <Maincontainer>
@@ -25,19 +30,18 @@ function Sidebar(){
             <div>
                 {
                     list.map((data)=>{
-                        // console.log(data.chat.length);
                         let usee = user.chat;
                         let goal = usee[usee.length-1];
                         const lastchat = data.chat;
                         const ans = lastchat[lastchat.length - 1];
+
+                        // showing all the chats for the friends
                        return <Convos key={data.Id} data={data} lastchat={user.user === data.name ? (goal !== undefined ? goal.message: null):(ans !== undefined ? ans.message: null)} />
                     })
                 }
-
-                {/* <Convos/>
-                <Convos/> */}
             </div>
 
+                {/* container for chat */}
         </Maincontainer>
 
     )
