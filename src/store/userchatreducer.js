@@ -15,7 +15,7 @@ const userchatslice = createSlice({
     reducers:{
 
         addingUser: (state, payload) =>{
-            console.log(payload.payload.name);
+            // console.log(payload.payload.name);
 
             let my = {
                 ...state,
@@ -34,7 +34,7 @@ const userchatslice = createSlice({
         },
 
         addingChat: (state, payload)=>{
-            console.log(payload.payload);
+            // console.log(payload.payload);
 
             let arr = [];
             let foundele; 
@@ -44,10 +44,10 @@ const userchatslice = createSlice({
             async function a(){
                 const docRef = doc(db, "chat", "friends");
                 const docSnap = await getDoc(docRef);
-                console.log(docSnap.data());
+                // console.log(docSnap.data());
 
                 foundele = docSnap.data().friends.find(item=> item.name == payload.payload.user)
-                console.log(foundele);
+                // console.log(foundele);
 
                 temp = JSON.parse(JSON.stringify(foundele));
 

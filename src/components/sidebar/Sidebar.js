@@ -14,7 +14,7 @@ function Sidebar(){
     useEffect(()=>{
         let arr = [];
         const unsub = onSnapshot(doc(db, "chat", "friends"), (doc) => {
-            console.log("Current data: ", doc.data());
+            // console.log("Current data: ", doc.data());
             arr = doc.data().friends;
             setList(arr);
         });
@@ -36,7 +36,7 @@ function Sidebar(){
                         const ans = lastchat[lastchat.length - 1];
 
                         // showing all the chats for the friends
-                       return <Convos key={data.Id} data={data} lastchat={user.user === data.name ? (goal !== undefined ? goal.message: null):(ans !== undefined ? ans.message: null)} />
+                       return <Convos key={data.name} data={data} lastchat={user.user === data.name ? (goal !== undefined ? goal.message: null):(ans !== undefined ? ans.message: null)} />
                     })
                 }
             </div>

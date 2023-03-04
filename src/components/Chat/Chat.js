@@ -17,7 +17,7 @@ function Chat(){
 
     const handleAddChat = ()=>{
         dispatch(addingChat(inmessage));
-        return setInmessage("");
+        return setInmessage({user:'',mess:""});
     }
 
     let i = 0;

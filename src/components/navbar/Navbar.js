@@ -18,7 +18,7 @@ function Navbar(){
     
     // managing the state of the input for search bar
     function handleFind(e){
-        console.log(e.target.value)
+        // console.log(e.target.value)
         setFind(e.target.value);
     }
 
@@ -43,7 +43,7 @@ function Navbar(){
         async function b(){
             const docRef = doc(db, "chat", "friends");
             const docSnap = await getDoc(docRef);
-            console.log(docSnap.data());
+            // console.log(docSnap.data());
             let dataindb = docSnap.data();
             dataindb.friends.map((item)=>{
                 if(item.name == found.name){
