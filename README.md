@@ -1,5 +1,7 @@
 #Chat Web Application
+
 ##Technology Used
+
  *React*
 
 #how to use the app:-
@@ -11,6 +13,7 @@ to make the data persistent, firestore has been used
 #folder structure
 
 all the components are in src in component folder
+
 ##src 
     *component*
         **chat**
